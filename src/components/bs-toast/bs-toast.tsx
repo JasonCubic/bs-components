@@ -29,6 +29,7 @@ export class BsToast { // eslint-disable-line import/prefer-default-export
   @Prop({mutable: true}) delay: number = 500;
 
   componentWillLoad() {
+    this.autoHideToast();
   }
 
   @Listen('click')
@@ -45,10 +46,7 @@ export class BsToast { // eslint-disable-line import/prefer-default-export
 
   @Listen('shown.bs.toast')
   handleShown() {
-    if(!this.autohide)
-      return;
-
-    setTimeout(() => this.hide(), this.delay);
+    this.autoHideToast();
   }
 
   destroyToast() {
@@ -64,11 +62,19 @@ export class BsToast { // eslint-disable-line import/prefer-default-export
     });
   }
 
+  autoHideToast() {
+    if (!this.autohide || !this.isShown())
+      return;
+
+    setTimeout(() => this.hide(), this.delay);
+  }
+
+  private isShown = () => hasClass(this.toastEl, 'show');
+
   @Method()
   async hide() {
-    if (!hasClass(this.toastEl, 'show')) {
+    if (!this.isShown())
       return;
-    }
 
     const closeEvent = customEvent(this.toastEl, this.hideEventName);
     if (closeEvent.defaultPrevented) {
@@ -89,7 +95,7 @@ export class BsToast { // eslint-disable-line import/prefer-default-export
 
   @Method()
   async show() {
-    if (hasClass(this.toastEl, 'show')) {
+    if (this.isShown()) {
       return;
     }
 
