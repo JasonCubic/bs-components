@@ -44,11 +44,6 @@ export class BsToast { // eslint-disable-line import/prefer-default-export
     }
   }
 
-  @Listen('shown.bs.toast')
-  handleShown() {
-    this.autoHideToast();
-  }
-
   destroyToast() {
     if (!this.noSelfRemoveFromDom) {
       this.toastEl.parentNode.removeChild(this.toastEl);
@@ -113,6 +108,7 @@ export class BsToast { // eslint-disable-line import/prefer-default-export
         window.requestAnimationFrame(() => { // discussed here:  https://www.youtube.com/watch?v=aCMbSyngXB4&t=11m
           setTimeout(() => {
             customEvent(this.toastEl, this.shownEventName);
+            this.autoHideToast();
           }, 0);
         });
       });
