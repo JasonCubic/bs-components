@@ -4,7 +4,7 @@ import {
   Listen, // eslint-disable-line no-unused-vars
   Element,
   Method, // eslint-disable-line no-unused-vars
-  Watch, h, // eslint-disable-line no-unused-vars
+  h
 } from '@stencil/core';
 
 import _ from 'lodash';
