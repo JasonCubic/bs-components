@@ -24,7 +24,7 @@ export class BsToast { // eslint-disable-line import/prefer-default-export
   @Prop() hideEventName: string = 'hide.bs.toast';
   @Prop() hiddenEventName: string = 'hidden.bs.toast';
 
-  @Prop() noSelfRemoveFromDom: boolean = true;
+  @Prop() noSelfRemoveFromDom: boolean = false;
   @Prop({mutable: true}) autohide: boolean = true;
   @Prop({mutable: true}) delay: number = 500;
 
