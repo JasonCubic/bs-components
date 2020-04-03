@@ -10,6 +10,7 @@ www/
 log.txt
 *.sublime-project
 *.sublime-workspace
+*.orig
 
 .stencil/
 .idea/
